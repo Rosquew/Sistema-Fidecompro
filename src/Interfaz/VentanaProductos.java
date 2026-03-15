@@ -154,50 +154,55 @@ public class VentanaProductos extends JFrame {
     }
 
     private void guardarProducto() {
-        try {
-            if (txtId.getText().trim().isEmpty()
-                    || txtNombre.getText().trim().isEmpty()
-                    || txtPrecio.getText().trim().isEmpty()
-                    || txtStock.getText().trim().isEmpty()) {
+    try {
 
-                throw new Exception("Debe completar todos los campos.");
-            }
+        if (txtId.getText().trim().isEmpty() ||
+            txtNombre.getText().trim().isEmpty() ||
+            txtPrecio.getText().trim().isEmpty() ||
+            txtStock.getText().trim().isEmpty()) {
 
-            int id = Integer.parseInt(txtId.getText().trim());
-            String nombre = txtNombre.getText().trim();
-            String tipo = cmbTipo.getSelectedItem().toString();
-            double precio = Double.parseDouble(txtPrecio.getText().trim());
-            int stock = Integer.parseInt(txtStock.getText().trim());
-
-            if (precio < 0 || stock < 0) {
-                throw new Exception("El precio y el stock no pueden ser negativos.");
-            }
-
-            if (sistema.buscarProductoPorId(id) != null) {
-                throw new Exception("Ya existe un producto con ese ID.");
-            }
-
-            Producto producto;
-
-            if (tipo.equals("Tecnología")) {
-                producto = new ProductoTecnologia(id, nombre, precio, stock);
-            } else {
-                producto = new ProductoOficina(id, nombre, precio, stock);
-            }
-
-            sistema.agregarProducto(producto);
-
-            cargarTablaProductos();
-            limpiarCampos();
-
-            JOptionPane.showMessageDialog(this, "Producto guardado correctamente.");
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "El ID, precio y stock deben ser numéricos.");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            throw new Exception("Debe completar todos los campos.");
         }
+
+        int id = Integer.parseInt(txtId.getText().trim());
+        String nombre = txtNombre.getText().trim();
+        String tipo = cmbTipo.getSelectedItem().toString();
+        double precio = Double.parseDouble(txtPrecio.getText().trim());
+        int stock = Integer.parseInt(txtStock.getText().trim());
+
+        if (precio < 0) {
+            throw new Exception("El precio no puede ser negativo.");
+        }
+
+        if (stock < 0) {
+            throw new Exception("El stock no puede ser negativo.");
+        }
+
+        if (sistema.buscarProductoPorId(id) != null) {
+            throw new Exception("Ya existe un producto con ese ID.");
+        }
+
+        Producto producto;
+
+        if (tipo.equals("Tecnología")) {
+            producto = new ProductoTecnologia(id, nombre, precio, stock);
+        } else {
+            producto = new ProductoOficina(id, nombre, precio, stock);
+        }
+
+        sistema.agregarProducto(producto);
+
+        cargarTablaProductos();
+        limpiarCampos();
+
+        JOptionPane.showMessageDialog(this, "Producto guardado correctamente.");
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El ID, precio y stock deben ser valores numéricos.");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
     }
+}
 
     private void actualizarProducto() {
         try {
