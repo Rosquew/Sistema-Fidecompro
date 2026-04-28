@@ -1,52 +1,111 @@
-Sistema de Facturación - Fidecompro
+# Sistema de Facturación - Fidecompro
 
-Este proyecto corresponde al desarrollo de un sistema básico de facturación realizado en Java como parte de un trabajo académico. El objetivo del sistema es permitir la gestión sencilla de clientes y productos mediante una interfaz gráfica desarrollada con Java Swing.
+Este proyecto corresponde al desarrollo de un sistema de facturación realizado en Java como parte del curso Programación Cliente/Servidor Concurrente. El sistema permite gestionar clientes, productos, facturas y consultar las facturas registradas mediante una interfaz gráfica desarrollada con Java Swing.
 
-El sistema implementa una estructura organizada en capas donde se separa la lógica del sistema de la interfaz gráfica, lo que permite mantener el código más ordenado y fácil de mantener.
+El proyecto está organizado por capas, separando la interfaz gráfica, la lógica del sistema y el acceso a datos mediante MySQL.
 
-Acceso al sistema
-Para ingresar al sistema se utiliza el siguiente usuario de prueba:
+## Acceso al sistema
 
 Usuario: admin  
 Contraseña: 1234
 
-Estas credenciales están definidas dentro del sistema para permitir el acceso inicial a la aplicación.
+## Funcionalidades principales
 
-Funcionalidades principales
-El sistema incluye las siguientes funcionalidades:
 - Inicio de sesión de usuario
 - Gestión de clientes
-- Registro de productos
-- Actualización de productos
-- Eliminación de productos
-- Visualización de productos en tabla
+- Gestión de productos
+- Registro, actualización y eliminación de productos
+- Creación de facturas
+- Registro del detalle de factura
+- Descuento automático de stock al facturar
+- Consulta de facturas registradas
+- Visualización del detalle de cada factura
+- Conexión con base de datos MySQL
 
-Estas funcionalidades permiten simular el funcionamiento básico de un sistema de facturación utilizado en entornos comerciales.
+## Base de datos
 
-Estructura del proyecto
-El proyecto se divide principalmente en dos paquetes:
+El sistema utiliza una base de datos MySQL llamada:
 
-Interfaz
+fidecompro_db
+
+Para crear la base de datos y sus tablas, se debe ejecutar el archivo:
+
+fidecompro_db.sql
+
+Este archivo contiene la estructura necesaria para crear las siguientes tablas:
+
+- clientes
+- productos
+- facturas
+- detalle_factura
+
+## Configuración de conexión
+
+La conexión a la base de datos se encuentra en la clase:
+
+src/datos/ConexionBD.java
+
+Antes de ejecutar el proyecto, se debe verificar que los datos de conexión coincidan con la configuración local de MySQL:
+
+- Host: localhost o 127.0.0.1
+- Puerto: 3306
+- Usuario: root
+- Contraseña: según la configuración del equipo
+- Base de datos: fidecompro_db
+
+## Cómo ejecutar el proyecto
+
+1. Abrir MySQL Workbench.
+2. Ejecutar el archivo fidecompro_db.sql.
+3. Abrir el proyecto en NetBeans.
+4. Verificar la contraseña en la clase ConexionBD.java.
+5. Ejecutar Main.java.
+6. Iniciar sesión con las credenciales indicadas.
+
+## Estructura del proyecto
+
+### Interfaz
+
 Contiene las ventanas del sistema desarrolladas con Java Swing.
+
 - VentanaLogin
 - VentanaMenu
 - VentanaClientes
 - VentanaProductos
+- VentanaFacturacion
+- VentanaVerFacturas
 
-Logica
-Contiene las clases que representan las entidades del sistema y la lógica de funcionamiento.
+### logica
+
+Contiene las clases que representan las entidades principales del sistema.
+
 - Usuario
 - Cliente
 - Producto
 - ProductoTecnologia
 - ProductoOficina
+- Factura
+- DetalleFactura
 - SistemaFacturacion
 
-Tecnologías utilizadas
+### datos
+
+Contiene las clases encargadas de la conexión y operaciones con la base de datos.
+
+- ConexionBD
+- ClienteDB
+- ProductoDB
+- FacturaDB
+
+## Tecnologías utilizadas
+
 - Java
 - Java Swing
+- MySQL
+- JDBC
 - NetBeans
 - Programación Orientada a Objetos
 
-Autor
-Proyecto académico desarrollado para el curso Programación Cliente/Servidor Concurrente Fidélitas Virtual 2026
+## Autor
+
+Proyecto académico desarrollado para el curso Programación Cliente/Servidor Concurrente, Fidélitas Virtual 2026.
