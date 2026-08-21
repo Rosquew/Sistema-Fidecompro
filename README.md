@@ -1,111 +1,155 @@
-# Sistema de Facturación - Fidecompro
+Sistema de Gestión de Inventario - TechZone CR
 
-Este proyecto corresponde al desarrollo de un sistema de facturación realizado en Java como parte del curso Programación Cliente/Servidor Concurrente. El sistema permite gestionar clientes, productos, facturas y consultar las facturas registradas mediante una interfaz gráfica desarrollada con Java Swing.
+Este proyecto corresponde al desarrollo de un sistema de gestión de inventario para la empresa ficticia TechZone CR, realizado como parte del curso Lenguajes de Base de Datos.
 
-El proyecto está organizado por capas, separando la interfaz gráfica, la lógica del sistema y el acceso a datos mediante MySQL.
+El sistema permite administrar categorías, proveedores, productos, clientes, ventas y movimientos de inventario mediante una interfaz gráfica desarrollada en Python con Tkinter. La información se almacena en una base de datos MySQL y las principales operaciones se realizan mediante procedimientos almacenados.
 
-## Acceso al sistema
-
-Usuario: admin  
-Contraseña: 1234
-
-## Funcionalidades principales
-
-- Inicio de sesión de usuario
-- Gestión de clientes
-- Gestión de productos
-- Registro, actualización y eliminación de productos
-- Creación de facturas
-- Registro del detalle de factura
-- Descuento automático de stock al facturar
-- Consulta de facturas registradas
-- Visualización del detalle de cada factura
-- Conexión con base de datos MySQL
-
-## Base de datos
+Funcionalidades principales
+Gestión de categorías.
+Gestión de proveedores.
+Gestión de productos.
+Gestión de clientes.
+Registro y administración de ventas.
+Registro y administración del detalle de las ventas.
+Control de entradas y salidas de inventario.
+Actualización automática de información relacionada con ventas e inventario.
+Consulta de diferentes reportes.
+Uso de procedimientos almacenados para las operaciones CRUD.
+Uso de funciones, vistas, triggers y cursores en MySQL.
+Conexión entre Python y MySQL.
+Interfaz gráfica desarrollada con Tkinter.
+Base de datos
 
 El sistema utiliza una base de datos MySQL llamada:
 
-fidecompro_db
+techzone_cr
 
-Para crear la base de datos y sus tablas, se debe ejecutar el archivo:
+Los archivos necesarios para crear la base de datos se encuentran dentro de la carpeta:
 
-fidecompro_db.sql
+scripts
 
-Este archivo contiene la estructura necesaria para crear las siguientes tablas:
+Los scripts deben ejecutarse en MySQL Workbench siguiendo el orden numérico en el que se encuentran organizados.
 
-- clientes
-- productos
-- facturas
-- detalle_factura
+Estos archivos permiten crear las tablas, procedimientos almacenados, funciones, vistas, triggers, cursores y demás componentes utilizados por el sistema.
 
-## Configuración de conexión
+Las principales tablas de la base de datos son:
 
-La conexión a la base de datos se encuentra en la clase:
+categorias
+proveedores
+productos
+clientes
+ventas
+detalle_venta
+movimientos_inventario
+Configuración de conexión
 
-src/datos/ConexionBD.java
+La configuración utilizada para conectarse con MySQL se encuentra en:
 
-Antes de ejecutar el proyecto, se debe verificar que los datos de conexión coincidan con la configuración local de MySQL:
+python/config.py
 
-- Host: localhost o 127.0.0.1
-- Puerto: 3306
-- Usuario: root
-- Contraseña: según la configuración del equipo
-- Base de datos: fidecompro_db
+Por seguridad, este archivo no se incluye directamente en el repositorio debido a que contiene la contraseña utilizada para acceder a MySQL.
 
-## Cómo ejecutar el proyecto
+En el proyecto se incluye el archivo:
 
-1. Abrir MySQL Workbench.
-2. Ejecutar el archivo fidecompro_db.sql.
-3. Abrir el proyecto en NetBeans.
-4. Verificar la contraseña en la clase ConexionBD.java.
-5. Ejecutar Main.java.
-6. Iniciar sesión con las credenciales indicadas.
+python/config.example
 
-## Estructura del proyecto
+Este archivo puede utilizarse como referencia para crear el archivo config.py.
 
-### Interfaz
+La configuración debe tener una estructura similar a la siguiente:
 
-Contiene las ventanas del sistema desarrolladas con Java Swing.
+DB_CONFIG = {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "contraseña_mysql",
+    "database": "techzone_cr"
+}
 
-- VentanaLogin
-- VentanaMenu
-- VentanaClientes
-- VentanaProductos
-- VentanaFacturacion
-- VentanaVerFacturas
 
-### logica
+La contraseña debe modificarse de acuerdo con la configuración de MySQL utilizada en el equipo donde se ejecutará el sistema.
 
-Contiene las clases que representan las entidades principales del sistema.
+Requisitos
 
-- Usuario
-- Cliente
-- Producto
-- ProductoTecnologia
-- ProductoOficina
-- Factura
-- DetalleFactura
-- SistemaFacturacion
+Para ejecutar el proyecto se necesita tener instalado:
 
-### datos
+Python 3.
+MySQL Server.
+MySQL Workbench.
+mysql-connector-python.
+Tkinter, incluido normalmente con la instalación de Python.
 
-Contiene las clases encargadas de la conexión y operaciones con la base de datos.
+Las dependencias de Python también se encuentran indicadas en el archivo:
 
-- ConexionBD
-- ClienteDB
-- ProductoDB
-- FacturaDB
+python/requirements.txt
 
-## Tecnologías utilizadas
+Para instalarlas se puede utilizar:
 
-- Java
-- Java Swing
-- MySQL
-- JDBC
-- NetBeans
-- Programación Orientada a Objetos
+pip install -r requirements.txt
 
-## Autor
+Cómo ejecutar el proyecto
+Iniciar MySQL Server.
+Abrir MySQL Workbench.
+Ejecutar los archivos de la carpeta scripts siguiendo su orden correspondiente.
+Verificar que la base de datos techzone_cr haya sido creada correctamente.
+Crear el archivo config.py dentro de la carpeta python utilizando config.example como referencia.
+Colocar en config.py el usuario y contraseña correspondientes a MySQL.
+Abrir una terminal dentro de la carpeta python.
+Instalar las dependencias utilizando:
+pip install -r requirements.txt
 
-Proyecto académico desarrollado para el curso Programación Cliente/Servidor Concurrente, Fidélitas Virtual 2026.
+Ejecutar la interfaz gráfica utilizando:
+python interfaz.py
+
+
+Al iniciar correctamente, se mostrará el menú principal de TechZone CR y el mensaje indicando que la conexión con MySQL se realizó correctamente.
+
+Estructura del proyecto
+python
+
+Contiene el código utilizado para conectar la aplicación con MySQL y ejecutar las diferentes funciones del sistema.
+
+Archivos principales:
+
+interfaz.py: contiene la interfaz gráfica desarrollada con Tkinter.
+main.py: contiene la versión del sistema utilizada desde consola.
+config.py: contiene la configuración local de conexión con MySQL.
+config.example: ejemplo de la configuración necesaria.
+requirements.txt: contiene las dependencias necesarias para ejecutar el proyecto.
+python/db
+
+Contiene el archivo encargado de establecer la conexión con MySQL.
+
+conexion.py
+python/modulos
+
+Contiene los módulos utilizados para trabajar con las diferentes áreas del sistema.
+
+categorias.py
+proveedores.py
+productos.py
+clientes.py
+ventas.py
+inventario.py
+reportes.py
+scripts
+
+Contiene los archivos SQL utilizados para construir y configurar la base de datos.
+
+Dentro de estos scripts se encuentran los elementos necesarios para crear las tablas, procedimientos almacenados, funciones, vistas, triggers, cursores y datos utilizados por el sistema.
+
+Tecnologías utilizadas
+Python
+Tkinter
+MySQL
+MySQL Workbench
+mysql-connector-python
+SQL
+Git
+GitHub
+Integrantes
+Kevin Montero Fernández
+Danny Castro Méndez
+Mariana Rodríguez Orellana
+Proyecto académico
+
+Proyecto desarrollado para el curso Lenguajes de Base de Datos, 2026.
